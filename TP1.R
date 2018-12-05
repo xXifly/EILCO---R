@@ -71,26 +71,27 @@ yTest <- test[,2];
 # Affiche ces points dans un plot
 plot(xTest,yTest);
 
-v <- c(1:14);
+v <- seq(1,14);
 EQMT <- rep (0,14);
 EQMA <- rep (0,14);
 
 for (i in v) {
   
+  model <- lm(y ~ poly(x,i));
+  
   # Génère l'erreur quadratique moyenne sur l'ensemble test
-  modelTest <- lm(yTest ~ poly(xTest,i));
-  gTest <- predict(modelTest, data.frame(x = xTest));
-  EQMT[i] <- sqrt( sum( (yTest - gTest )^2 ) / nTest );
+  gTest <- predict(model, data.frame(x = xTest));
+  EQMT[i] <- sqrt(sum( (yTest - gTest )^2 ) / nTest );
   
   # Génère l'erreur quadratique moyenne sur l'ensemble d'apprentissage
-  model <- lm(y ~ poly(x,i));
   g <- predict(model, data.frame(x = x));
-  EQMA[i] <- sqrt( sum( (y - g)^2 ) / n );
+  EQMA[i] <- sqrt(sum( (y - g)^2 ) / n );
   
 }
 
-plot(EQMT);
-plot(EQMA);
-
+plot(v, EQMT, ylim=c(1,500), col="red", pch=19);
+points(v, EQMA, ylim=c(1,500), col="blue", pch=19);
+lines(EQMT, col="red");
+lines(EQMA, col="blue");
 
 
