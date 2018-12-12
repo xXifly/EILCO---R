@@ -75,8 +75,10 @@ v <- seq(1,14);
 EQMT <- rep (0,14);
 EQMA <- rep (0,14);
 
+
 for (i in v) {
   
+  # Génère des régressions polynomiales de degré 1 à 14
   model <- lm(y ~ poly(x,i));
   
   # Génère l'erreur quadratique moyenne sur l'ensemble test
