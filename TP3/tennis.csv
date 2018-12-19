@@ -1,0 +1,15 @@
+Ciel,Temperature,Humidite,Vent,Jouer
+Ensoleille,27.5,85,Faible,Non
+Ensoleille,25,90,Fort,Non
+Couvert,26.5,86,Faible,Oui
+Pluie,20,96,Faible,Oui
+Pluie,19,80,Faible,Oui
+Pluie,17.5,70,Fort,Non
+Couvert,17,65,Fort,Oui
+Ensoleille,21,95,Faible,Non
+Ensoleille,19.5,70,Faible,Oui
+Pluie,22.5,80,Faible,Oui
+Ensoleille,22.5,70,Fort,Oui
+Couvert,21,90,Fort,Oui
+Couvert,25.5,75,Faible,Oui
+Pluie,20.5,91,Fort,Non
