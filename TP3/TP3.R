@@ -84,3 +84,6 @@ text(tree.cars)
 
 tree.cars.pruned <- prune(tree.cars,cp=0.02)
 tree.cars.pruned
+plot(tree.cars.pruned, uniform=T, compress=T)
+text(tree.cars.pruned)
+tree.cars$cptable
