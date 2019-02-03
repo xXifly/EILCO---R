@@ -91,9 +91,11 @@ for (i in v) {
   
 }
 
+# On affiche nos taux d'erreurs
 plot(v, EQMT, ylim=c(1,500), col="red", pch=19);
 points(v, EQMA, ylim=c(1,500), col="blue", pch=19);
 lines(EQMT, col="red");
 lines(EQMA, col="blue");
 
-
+# min(EQMT) est obtenu au degré 3
+# On choisit donc une régression polynomiale de degré 3
