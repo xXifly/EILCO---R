@@ -51,14 +51,65 @@ normalize <- function(v) {
 # On normalise nos données afin d'obtenir une base de valeurs entre 0 et 1
 dataN <- lapply(dataR[,c(2:5)],normalize)
 dataN <- as.data.frame(dataN) 
+dataN <- cbind(dataN, dataR$Species)
+colnames(dataN) <- c("SepalLength", "SepalWidth", "PetalLength", "PetalWidth", "Species")
 
 # On divise notre base normalisée en deux partie "train" et "test"
 iris.app <- dataN[c(1:105),]
 iris.test <- dataN[c(106:150),]
 
+# On binarise la colonne "Species"
 iris.app$setosa <- dataR$Species[1:105] == "Iris-setosa"
 iris.app$virginica <- dataR$Species[1:105] == "Iris-virginica"
 iris.app$versicolor <- dataR$Species[1:105] == "Iris-versicolor"
+iris.app$Species <- NULL
+
+# On réalise un réseau de neurones
+net.iris <- neuralnet(setosa + virginica + versicolor  ~ SepalLength + SepalWidth + PetalLength + PetalWidth , data=iris.app, hidden=3, threshold=0.01)
+plot(net.iris)
+net.iris$result.matrix
+
+names(which.max(prediction$net.result[1,]))
+
+prediction <- compute(net.iris, iris.test)
+
+ls(prediction)
+print(prediction$net.result)
+
+labels.predicted <- rep(0,45)
+
+for(i in 1:45){
+    labels.predicted[i]<-names(which.max(prediction$net.result[i,]))
+}
+
+labels.predicted
+labels.predicted<-as.factor(labels.predicted)
+
+labels.predicted
+label.test
+table(iris.test[,5],labels.predicted)
 
 
+### Exercice 3 : réseau de neurones pour le régression
+######################################################
+
+data <- read.csv("gasoline.csv",header=TRUE)
+
+# On mélange la base
+n <- length(data$consumption)
+v <- round(runif(n,0,1), digits=2)
+dataR <- data[order(v),]
+
+# On normalise nos données afin d'obtenir une base de valeurs entre 0 et 1
+dataN <- lapply(dataR,normalize)
+dataN <- as.data.frame(dataN) 
+
+# On divise notre base normalisée en deux partie "train" et "test"
+gasoline.app <- dataN[c(1:30),]
+gasoline.test <- dataN[c(31:40),]
+
+# On réalise un réseau de neurones
+net.gasoline <- neuralnet(consumption ~ capacity + gasoline + hours, data=gasoline.app, hidden=c(2,1), linear.output = TRUE, threshold=0.01)
+net.gasoline$reslut.matrix
+plot(net.gasoline)
 
